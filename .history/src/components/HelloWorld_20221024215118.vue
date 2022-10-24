@@ -80,8 +80,8 @@ onWindowResize() {
 
       this.camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight,1,1000);
       // 创建渲染器
-      //增加下面两个属性，可以抗锯齿
-      this.renderer = new THREE.WebGLRenderer({antialias:true,alpha:true});
+
+      this.renderer = new THREE.WebGLRenderer();
 
       // 设置渲染器大小
 
@@ -126,7 +126,7 @@ onWindowResize() {
       this.camera.position.z = 300;
       this.camera.position.x = 300;
 
-      this.camera.position.y = 800;
+      this.camera.position.y = 0;
 
       // 用渲染器渲染场景，相机
 

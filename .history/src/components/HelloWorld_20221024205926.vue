@@ -10,15 +10,6 @@
 
 <script>
 import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-	// function onWindowResize() {
- 
-	// 	camera.aspect = window.innerWidth / window.innerHeight;
-	// 	camera.updateProjectionMatrix();
- 
-	// 	renderer.setSize( window.innerWidth, window.innerHeight );
- 
-	// }
 export default {
 
   data() {
@@ -32,8 +23,8 @@ export default {
       scene: null,
 
       camera: null,
-      hotData: [],
-      colorArray: [0xff0000, 0xffff00, 0x00ff00, 0x00ffff, 0x0000ff]
+      hotData: []
+
     };
 
   },
@@ -45,26 +36,18 @@ export default {
   },
 
   methods: {
-onWindowResize() {
- 
-		this.camera.aspect = window.innerWidth / window.innerHeight;
-		this.camera.updateProjectionMatrix();
- 
-		this.renderer.setSize( window.innerWidth, window.innerHeight );
- 
-	},
+
     getHotData() {
       let floorNum = 3
-      let hotNum = 20
+      let hotNum = 30
       for(let floor = 0; floor < floorNum; floor++) {
         this.hotData[floor] = []
         for(let i = 0; i <hotNum; i++) {
           let val = {
-            x: Math.random() * 150,
-            y: 200 * floor,
-            z: Math.random() * 150,
-            // z: 0,
-            val: Math.random() * 150
+            x: Math.random() * 50,
+            y: floor * 30,
+            z: Math.random() * 50,
+            val: Math.random() * 30
           }
           this.hotData[floor].push(val)
         }
@@ -79,9 +62,10 @@ onWindowResize() {
       // 创建相机（第一个参数视野夹角0~180°，第二参数相机大小，第三，四参数可看像素）
 
       this.camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight,1,1000);
+
       // 创建渲染器
-      //增加下面两个属性，可以抗锯齿
-      this.renderer = new THREE.WebGLRenderer({antialias:true,alpha:true});
+
+      this.renderer = new THREE.WebGLRenderer();
 
       // 设置渲染器大小
 
@@ -94,7 +78,7 @@ onWindowResize() {
       // 把渲染器放到dom中
 
       demo.appendChild(this.renderer.domElement);
-      console.log(this.hotData)
+
       // 创建一个立方体(长，宽，高)
       for(let i = 0; i < this.hotData.length; i++) {
         for(let j = 0; j < this.hotData[i].length; j++) {
@@ -104,7 +88,7 @@ onWindowResize() {
     
           let material = new THREE.MeshBasicMaterial({
     
-            color: this.colorArray[parseInt(this.hotData[i][j].val / 10 / 3)],
+            color: 0xcccccc,
     
           });
     
@@ -113,9 +97,9 @@ onWindowResize() {
           this.mesh[currentIndex] = new THREE.Mesh(geometry, material);
           // this.mesh
           // 将网格放入场景中
-          this.mesh[currentIndex].position.x = this.hotData[i][j].x
-          this.mesh[currentIndex].position.y = this.hotData[i][j].y + this.hotData[i][j].val / 2
-          this.mesh[currentIndex].position.z = this.hotData[i][j].z
+          this.mesh[currentIndex].x = this.hotData[i][j].x
+          this.mesh[currentIndex].y = this.hotData[i][j].y
+          this.mesh[currentIndex].z = this.hotData[i][j].z
           this.scene.add(this.mesh[currentIndex]);
 
         }
@@ -123,19 +107,14 @@ onWindowResize() {
 
       // 因默认情况相机与场景重合，需要先设定相机位置
 
-      this.camera.position.z = 300;
-      this.camera.position.x = 300;
+      this.camera.position.z = 50;
 
-      this.camera.position.y = 800;
+      this.camera.position.y = 0;
 
       // 用渲染器渲染场景，相机
 
       this.renderer.render(this.scene, this.camera);
 
-      let contorl = new OrbitControls(this.camera, this.renderer.domElement);
-      console.log(contorl)
-      this.onWindowResize()
-      window.addEventListener('resize', this.onWindowResize, false);
       this.animate();
 
     },
@@ -153,7 +132,8 @@ onWindowResize() {
       // // this.mesh.rotation.y += 0.05;
 
       // this.mesh.rotateY(0.01)
-      
+      this.camera.x += 5 
+
       this.renderer.render(this.scene, this.camera);
 
     },

@@ -61,7 +61,7 @@ onWindowResize() {
         for(let i = 0; i <hotNum; i++) {
           let val = {
             x: Math.random() * 150,
-            y: 200 * floor,
+            y: 150 * floor,
             z: Math.random() * 150,
             // z: 0,
             val: Math.random() * 150
@@ -80,8 +80,8 @@ onWindowResize() {
 
       this.camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight,1,1000);
       // 创建渲染器
-      //增加下面两个属性，可以抗锯齿
-      this.renderer = new THREE.WebGLRenderer({antialias:true,alpha:true});
+
+      this.renderer = new THREE.WebGLRenderer();
 
       // 设置渲染器大小
 
@@ -123,10 +123,10 @@ onWindowResize() {
 
       // 因默认情况相机与场景重合，需要先设定相机位置
 
-      this.camera.position.z = 300;
-      this.camera.position.x = 300;
+      this.camera.position.z = 100;
+      this.camera.position.x = 0;
 
-      this.camera.position.y = 800;
+      this.camera.position.y = 0;
 
       // 用渲染器渲染场景，相机
 

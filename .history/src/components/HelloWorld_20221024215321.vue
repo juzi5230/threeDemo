@@ -126,7 +126,7 @@ onWindowResize() {
       this.camera.position.z = 300;
       this.camera.position.x = 300;
 
-      this.camera.position.y = 800;
+      this.camera.position.y = 500;
 
       // 用渲染器渲染场景，相机
 
