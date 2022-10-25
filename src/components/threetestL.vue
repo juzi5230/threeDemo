@@ -38,7 +38,7 @@
           color: null,
           geometriesDrawn: [],
           geometriesPicking: [],
-          colorArray: ['0xff000066', '0xffff0066', '0x00ffff66', '0x0000ff66'],
+          colorArray: ['0xff0000', '0xffff00', '0x00ffff', '0x0000ff'],
           testData: [[31.289317,121.498510],
 [31.342570,121.460905],
 [31.132883,121.480387],
@@ -82,7 +82,7 @@
           position.setFromSpherical(spherical)
 
           let info = {
-            val: Math.random() * 100,
+            val: Math.random() * 10,
             x: position.x,
             y: 0,
             z: position.z
@@ -152,8 +152,8 @@
 
 
 
-          let data = this.getHotData()
-        //   let data = this.getDataTest()
+          // let data = this.getHotData()
+          let data = this.getDataTest()
           this.addCube(data)
 
           this.objects = new THREE.Mesh( BufferGeometryUtils.mergeBufferGeometries( this.geometriesDrawn ), defaultMaterial );
@@ -194,7 +194,7 @@
         },
         getColor (val) {
            let color = this.colorArray[3]
-           let res = parseInt(val / 10) + ''
+           let res = parseInt(val / 10 / 2) + ''
            switch (res) {
             case '2': color = this.colorArray[0]; break;
             case '3': color = this.colorArray[1]; break;
@@ -233,8 +233,8 @@
            for(let floor = 0; floor < data.length; floor++) {
              for(let i = 0; i < data[floor].length; i++) {
         
-            //    let geometry = new THREE.BoxGeometry(0.1, data[floor][i].val, 0.1);
-               let geometry = new THREE.BoxGeometry(10, data[floor][i].val, 10);
+               let geometry = new THREE.BoxGeometry(0.1, data[floor][i].val, 0.1);
+              //  let geometry = new THREE.BoxGeometry(10, data[floor][i].val, 10);
         
                const position = new THREE.Vector3();
                position.x = data[floor][i].x;
