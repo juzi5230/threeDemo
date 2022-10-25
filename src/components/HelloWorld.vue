@@ -33,6 +33,7 @@ export default {
 
       camera: null,
       hotData: [],
+      tween: null,
       colorArray: [0xff0000, 0xffff00, 0x00ff00, 0x00ffff, 0x0000ff]
     };
 
@@ -137,11 +138,19 @@ onWindowResize() {
       this.onWindowResize()
       window.addEventListener('resize', this.onWindowResize, false);
       this.animate();
-
     },
-
-    // 定义3D效果
-
+    // initTween(cube) {
+    //   var position = { scale: 0 };
+    //   this.tween = new TWEEN.Tween(position);
+    //   this.tween.to({ scale: 1 }, 500);
+    //   this.tween.easing(TWEEN.Easing.Sinusoidal.InOut);
+    //   this.tween.onUpdate(this.tweenupdate(cube));
+    //   this.tween.start();
+    // },
+    // // 定义3D效果
+    // tweenupdate() {
+		// 	cube.scale.y = this.scale
+    // },
     animate() {
 
       // 执行动画函数，执行完上一帧在执行下一帧
